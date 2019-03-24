@@ -15,9 +15,9 @@ only tested code would be moved to `src`
 
 # Environment Setup
 We will be using a ubuntu image for hosting server to make things simple.
-Run the [setup script](setup.sh) to install the required dependencies and set up the required environment
+Run the [setup script](setup.sh) to set up the *muimui* environment and install required dependencies.
 
-To work make *muimui* conda environment in jupyter run the following commands:
+To make *muimui* conda environment available in jupyter run the following commands:
 ```bash
 pip install ipykernel
 python -m ipykernel install --user --name myenv --display-name "muimui"
