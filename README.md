@@ -13,7 +13,11 @@ only tested code would be moved to `src`
 - [ ] Get a working version of auto-encoder notebook for the open fashion dataset
 ... add all the task here
 
-To work make *muimui* conda environment in jupyter do the following:
+# Environment Setup
+We will be using a ubuntu image for hosting server to make things simple
+run the ![setup.sh] to install the required dependencies and set up the required environment
+
+To work make *muimui* conda environment in jupyter run the following commands:
 ```bash
 pip install ipykernel
 python -m ipykernel install --user --name myenv --display-name "muimui"
