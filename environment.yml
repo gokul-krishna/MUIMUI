@@ -20,5 +20,32 @@ dependencies:
   - wheel=0.33.1
   - xz=5.2.4
   - zlib=1.2.11
+  - pip:
+    - backcall==0.1.0
+    - chardet==3.0.4
+    - decorator==4.4.0
+    - idna==2.8
+    - instagram-scraper==1.5.41
+    - ipykernel==5.1.0
+    - ipython==7.4.0
+    - ipython-genutils==0.2.0
+    - jedi==0.13.3
+    - jupyter-client==5.2.4
+    - jupyter-core==4.4.0
+    - parso==0.3.4
+    - pexpect==4.6.0
+    - pickleshare==0.7.5
+    - prompt-toolkit==2.0.9
+    - ptyprocess==0.6.0
+    - pygments==2.3.1
+    - python-dateutil==2.8.0
+    - pyzmq==18.0.1
+    - requests==2.21.0
+    - six==1.12.0
+    - tornado==6.0.2
+    - tqdm==4.31.1
+    - traitlets==4.3.2
+    - urllib3==1.24.1
+    - wcwidth==0.1.7
 prefix: /home/gokul/anaconda3/envs/muimui
 
