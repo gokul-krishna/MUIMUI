@@ -14,8 +14,8 @@ only tested code would be moved to `src`
 ... add all the task here
 
 # Environment Setup
-We will be using a ubuntu image for hosting server to make things simple
-run the [setup script](setup.sh) to install the required dependencies and set up the required environment
+We will be using a ubuntu image for hosting server to make things simple.
+Run the [setup script](setup.sh) to install the required dependencies and set up the required environment
 
 To work make *muimui* conda environment in jupyter run the following commands:
 ```bash
