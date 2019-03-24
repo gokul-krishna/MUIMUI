@@ -22,3 +22,5 @@ To work make *muimui* conda environment in jupyter run the following commands:
 pip install ipykernel
 python -m ipykernel install --user --name myenv --display-name "muimui"
 ```
+
+We are using this [Instagram scraper](https://github.com/rarcega/instagram-scraper)
