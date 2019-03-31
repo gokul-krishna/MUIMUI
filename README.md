@@ -7,10 +7,12 @@ only tested code would be moved to `src`
 ## Tasks
 - [x] Make list of Instagram (ig) influencers 
 - [x] Make list of Websites to scrape
-- [ ] Prioritize the type of wardrobe we are going to focus on `V0`
-- [ ] Decide on ig scraping mechanism
-- [ ] Make template for website scraping
+- [x] Prioritize the type of wardrobe we are going to focus on `V0`
+- [x] Decide on ig scraping mechanism
+- [x] Make template for website scraping
 - [ ] Get a working version of auto-encoder notebook for the open fashion dataset
+- [ ] Make wireframes for front-end
+- [ ] get `v0` pipeline for backend
 ... add all the task here
 
 # Environment Setup
