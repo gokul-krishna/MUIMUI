@@ -10,6 +10,7 @@ only tested code would be moved to `src`
 - [x] Prioritize the type of wardrobe we are going to focus on `V0`
 - [x] Decide on ig scraping mechanism
 - [x] Make template for website scraping
+- [x] end to end working of image-classification embedding
 - [ ] Get a working version of auto-encoder notebook for the open fashion dataset
 - [ ] Make wireframes for front-end
 - [ ] get `v0` pipeline for backend
