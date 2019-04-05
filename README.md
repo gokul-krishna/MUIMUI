@@ -11,8 +11,11 @@ only tested code would be moved to `src`
 - [x] Decide on ig scraping mechanism
 - [x] Make template for website scraping
 - [x] end to end working of image-classification embedding
+- [x] Make wireframes for front-end
+- [x] barebone version of flask site is up and running
+- [x] set up a seperate database server and upload all the data
+- [x] download all the images from the scrapped links
 - [ ] Get a working version of auto-encoder notebook for the open fashion dataset
-- [ ] Make wireframes for front-end
 - [ ] get `v0` pipeline for backend
 ... add all the task here
 
