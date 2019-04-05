@@ -35,3 +35,37 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return self.email
 
+
+class InstaInfluencer(db.Model):
+    """Instagram influencer's table
+    """
+
+    __tablename__ = 'insta_influencer'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String)
+    user_handle = db.Column(db.String)
+    user_last_scrapped = db.Column(db.DateTime)
+
+
+class Products(db.Model):
+    """Product inventory table
+    """
+
+    __tablename__ = 'products'
+
+    '''
+    TYPES = [('babana_republic', 'Banana Republic'),
+             ('hm', 'H&M'),
+             ('topshop', 'TopShop'),
+             ('mango', 'Mango'),
+             ('macys', "Macy's")]
+    '''
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    page_link = db.Column(db.String)
+    date_scrapped = db.Column(db.DateTime)
+    image_link = db.Column(db.String)
+    price = db.Column(db.Float)
+    origin_site = db.Column(db.String)
