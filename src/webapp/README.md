@@ -32,15 +32,15 @@ I did what most people recommend for the application's structure. Basically, eve
 
 ### Virtual environment
 
-``
-pip install virtualenv <br>
-virtualenv venv <br>
-source venv/bin/activate (venv\scripts\activate on Windows) <br>
-make install [run inside webapp folder] <br> 
-make dev <br>
-python manage.py initdb <br>
-python manage.py runserver <br>
-``
+```
+pip install virtualenv 
+virtualenv venv 
+source venv/bin/activate (venv\scripts\activate on Windows) 
+make install [run inside webapp folder]
+make dev 
+python manage.py initdb 
+python manage.py runserver 
+```
 
 ## Configuration
 
