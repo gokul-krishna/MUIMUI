@@ -15,6 +15,8 @@ userbp = Blueprint('userbp', __name__, url_prefix='/user')
 
 @userbp.route('/signup', methods=['GET', 'POST'])
 def signup():
+    ''' Render signup for to register user
+    and insert entry in database '''
     form = user_forms.SignUp()
     if form.validate_on_submit():
         # Create a user who hasn't validated his email address
@@ -48,11 +50,13 @@ def signup():
 
 @userbp.route('/confirm/<token>', methods=['GET', 'POST'])
 def confirm(token):
+    ''' Return email confirmation and redirect user to sign-in '''
     try:
         email = ts.loads(token, salt='email-confirm-key', max_age=86400)
     # The token can either expire or be invalid
     except:
         abort(404)
+
     # Get the user from the database
     user = models.User.query.filter_by(email=email).first()
     # The user has confirmed his or her email address
@@ -67,6 +71,9 @@ def confirm(token):
 
 @userbp.route('/signin', methods=['GET', 'POST'])
 def signin():
+    ''' Function to direct user to index page if log-in is successful,
+    back to sign in page if incorrect password/email is given
+    '''
     form = user_forms.Login()
     if form.validate_on_submit():
         user = models.User.query.filter_by(email=form.email.data).first()
@@ -89,6 +96,8 @@ def signin():
 
 @userbp.route('/signout')
 def signout():
+    ''' Function to signout user
+    and redirect to index page '''
     logout_user()
     flash('Succesfully signed out.', 'positive')
     return redirect(url_for('index'))
@@ -97,11 +106,14 @@ def signout():
 @userbp.route('/account')
 @login_required
 def account():
+    ''' Render page for user account details '''
     return render_template('user/account.html', title='Account')
 
 
 @userbp.route('/forgot', methods=['GET', 'POST'])
 def forgot():
+    ''' Functions to handle cases when user forgets email id
+    Redirect user to index page after '''
     form = user_forms.Forgot()
     if form.validate_on_submit():
         user = models.User.query.filter_by(email=form.email.data).first()
@@ -128,6 +140,7 @@ def forgot():
 
 @userbp.route('/reset/<token>', methods=['GET', 'POST'])
 def reset(token):
+    ''' Functions to handle reset settings for password change '''
     try:
         email = ts.loads(token, salt='password-reset-key', max_age=86400)
     # The token can either expire or be invalid
