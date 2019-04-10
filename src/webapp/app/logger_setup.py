@@ -2,8 +2,8 @@
 logger_setup.py customizes the app's logging module. Each time an event is
 logged the logger checks the level of the event (eg. debug, warning, info...).
 If the event is above the approved threshold then it goes through. The handlers
-do the same thing; they output to a file/shell if the event level is above their
-threshold.
+do the same thing; they output to a file/shell if the event level is above
+their threshold.
 :Example:
         >>> from website import logger
         >>> logger.info('event', foo='bar')
@@ -42,7 +42,9 @@ TZ = pytz.timezone(app.config['TIMEZONE'])
 def add_fields(_, level, event_dict):
     ''' Add custom fields to each record. '''
     now = dt.datetime.now()
-    event_dict['timestamp'] = TZ.localize(now, True).astimezone(pytz.utc).isoformat()
+    event_dict['timestamp'] = TZ.localize(now,
+                                          True).astimezone(
+                                          pytz.utc).isoformat()
     event_dict['level'] = level
 
     if session:
@@ -50,7 +52,8 @@ def add_fields(_, level, event_dict):
 
     if request:
         try:
-            event_dict['ip_address'] = request.headers['X-Forwarded-For'].split(',')[0].strip()
+            event_dict['ip_address'] = request.headers['X-Forwarded-For']. \
+                                       split(',')[0].strip()
         except:
             event_dict['ip_address'] = 'unknown'
 

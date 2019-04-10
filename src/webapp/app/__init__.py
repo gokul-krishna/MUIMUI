@@ -41,6 +41,8 @@ login_manager.login_view = 'userbp.signin'
 
 @login_manager.user_loader
 def load_user(email):
+    """Querying the email to check if user is in the DataBase"""
     return User.query.filter(User.email == email).first()
+
 
 from app import admin
