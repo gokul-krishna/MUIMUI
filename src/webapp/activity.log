@@ -1,0 +1,37 @@
+Exception on /signin [GET]
+Traceback (most recent call last):
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/src/webapp/app/views/main.py", line 63, in signin
+    return render_template('/user/signin.html')
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/src/webapp/app/templates/user/signin.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/src/webapp/app/templates/layout.html", line 62, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/src/webapp/app/templates/user/signin.html", line 12, in block "content"
+    {{ m.render_field(form.email) }}
+  File "/home/jyoti/MSDS/MSDS603/MUIMUI/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
