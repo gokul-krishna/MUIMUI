@@ -52,6 +52,14 @@ class InstaInfluencer(db.Model):
     user_last_scrapped = db.Column(db.DateTime)
 
 
+class InstaPost(db.Model):
+    """ Instagram influencer's table """
+
+    __tablename__ = 'insta_post'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+
 class Products(db.Model):
     """Product inventory table
     """

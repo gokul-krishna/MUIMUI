@@ -4,11 +4,12 @@ import random
 from flask import send_from_directory
 import os
 
+root_dir = os.path.dirname(os.getcwd()) + '/webapp/app/'
+
 
 @app.route('/js/<path:filename>')
 def serve_js(filename):
     ''' Serve JS script given a file name '''
-    root_dir = os.path.dirname(os.getcwd())
     return send_from_directory(
             os.path.join(root_dir, 'static', 'js'), filename)
 
@@ -16,7 +17,6 @@ def serve_js(filename):
 @app.route('/images/<path:filename>')
 def serve_images(filename):
     ''' Return images given a file name '''
-    root_dir = os.path.dirname(os.getcwd())
     return send_from_directory(
             os.path.join(root_dir, 'static', 'images_2'), filename)
 
@@ -24,7 +24,6 @@ def serve_images(filename):
 @app.route('/images_2/<path:filename>')
 def serve_images_2(filename):
     ''' Return images given a file name '''
-    root_dir = os.path.dirname(os.getcwd())
     return send_from_directory(
             os.path.join(root_dir, 'static', 'images_2'), filename)
 
@@ -32,7 +31,6 @@ def serve_images_2(filename):
 @app.route('/plugins/<path:filename>')
 def serve_plugins(filename):
     ''' Return plugins given a file name '''
-    root_dir = os.path.dirname(os.getcwd())
     return send_from_directory(
             os.path.join(root_dir, 'static', 'plugins'), filename)
 
@@ -40,7 +38,6 @@ def serve_plugins(filename):
 @app.route('/styles/<path:filename>')
 def serve_styles(filename):
     ''' Return styles given a file name '''
-    root_dir = os.path.dirname(os.getcwd())
     return send_from_directory(
             os.path.join(root_dir, 'static', 'styles'), filename)
 
@@ -48,7 +45,6 @@ def serve_styles(filename):
 @app.route('/css/<path:filename>')
 def serve_css(filename):
     ''' Return css given a file name '''
-    root_dir = os.path.dirname(os.getcwd())
     return send_from_directory(
             os.path.join(root_dir, 'static', 'css'), filename)
 
