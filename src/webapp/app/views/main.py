@@ -4,6 +4,8 @@ import random
 from flask import send_from_directory
 import os
 from ..models import db, User, InstaPost
+from flask.ext.login import login_user, logout_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 
 root_dir = os.path.dirname(os.getcwd()) + '/webapp/app/'
 
@@ -54,7 +56,8 @@ def serve_css(filename):
 @app.route('/index')
 def index():
     ''' Return index template '''
-    return render_template('index_2.html', title='Home')
+    return render_template('index_2.html',
+                           authenticated=current_user.is_authenticated)
 
 
 @app.route('/upload')
@@ -64,6 +67,7 @@ def upload():
 
 
 @app.route('/product')
+@login_required
 def map():
     ''' Return template for maps '''
     insta_url = InstaPost.query.get(111).post_link + '/'

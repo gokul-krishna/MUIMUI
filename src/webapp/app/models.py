@@ -17,6 +17,15 @@ class User(db.Model, UserMixin):
     confirmation = db.Column(db.Boolean)
     _password = db.Column(db.String)
 
+    def __init__(self, first_name, last_name, phone, email,
+                 confirmation, _password):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.phone = phone
+        self.email = email
+        self.confirmation = confirmation
+        self.set_password(_password)
+
     @property
     def full_name(self):
         """ Returns First Name and Last Name"""
@@ -30,7 +39,13 @@ class User(db.Model, UserMixin):
     @password.setter
     def _set_password(self, plaintext):
         """ Generates hashed password"""
-        self._password = bcrypt.generate_password_hash(plaintext)
+        self._password = bcrypt.generate_password_hash(plaintext).decode('utf-8')
+        # pwhash = bcrypt.hashpw(plaintext.encode('utf8'), bcrypt.gensalt())
+        # self._password = pwhash.decode('utf8')
+
+    def set_password(self, password):
+        self._password = bcrypt.generate_password_hash(password).decode('utf-8')
+
 
     def check_password(self, plaintext):
         """ Checks password entered by user with original password """
