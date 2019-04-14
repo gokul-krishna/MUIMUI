@@ -8,6 +8,7 @@ from app.toolbox import email
 
 # Serializer for generating random tokens
 ts = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 # Create a user blueprint
 userbp = Blueprint('userbp', __name__, url_prefix='/user')
@@ -26,26 +27,26 @@ def signup():
             phone=form.phone.data,
             email=form.email.data,
             confirmation=False,
-            password=form.password.data,
+            _password=form.password.data,
         )
         # Insert the user in the database
         db.session.add(user)
         db.session.commit()
         # Subject of the confirmation email
-        subject = 'Please confirm your email address.'
+        #subject = 'Please confirm your email address.'
         # Generate a random token
-        token = ts.dumps(user.email, salt='email-confirm-key')
+        #token = ts.dumps(user.email, salt='email-confirm-key')
         # Build a confirm link with token
-        confirmUrl = url_for('userbp.confirm', token=token, _external=True)
+        #confirmUrl = url_for('userbp.confirm', token=token, _external=True)
         # Render an HTML template to send by email
-        html = render_template('email/confirm.html',
-                               confirm_url=confirmUrl)
+        #html = render_template('email/confirm.html',
+        #                       confirm_url=confirmUrl)
         # Send the email to user
-        email.send(user.email, subject, html)
+        #email.send(user.email, subject, html)
         # Send back to the home page
-        flash('Check your emails to confirm your email address.', 'positive')
-        return redirect(url_for('index'))
-    return render_template('user/signup.html', form=form, title='Sign up')
+        #flash('Check your emails to confirm your email address.', 'positive')
+        return redirect(url_for('map'))
+    return render_template('user/signup2.html', form=form, title='Sign up')
 
 
 @userbp.route('/confirm/<token>', methods=['GET', 'POST'])
@@ -84,17 +85,18 @@ def signin():
                 login_user(user)
                 # Send back to the home page
                 flash('Succesfully signed in.', 'positive')
-                return redirect(url_for('index'))
+                return redirect(url_for('map'))
             else:
                 flash('The password you have entered is wrong.', 'negative')
                 return redirect(url_for('userbp.signin'))
         else:
             flash('Unknown email address.', 'negative')
             return redirect(url_for('userbp.signin'))
-    return render_template('user/signin.html', form=form, title='Sign in')
+    return render_template('user/signin2.html', form=form, title='Sign in')
 
 
 @userbp.route('/signout')
+@login_required
 def signout():
     ''' Function to signout user
     and redirect to index page '''

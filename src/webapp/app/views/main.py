@@ -3,6 +3,9 @@ from app import app
 import random
 from flask import send_from_directory
 import os
+from ..models import db, User, InstaPost
+from flask.ext.login import login_user, logout_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 
 root_dir = os.path.dirname(os.getcwd()) + '/webapp/app/'
 
@@ -53,19 +56,23 @@ def serve_css(filename):
 @app.route('/index')
 def index():
     ''' Return index template '''
-    return render_template('index.html', title='Home')
+    return render_template('index_2.html',
+                           authenticated=current_user.is_authenticated)
 
 
 @app.route('/upload')
 def upload():
     ''' Return upload template '''
-    return render_template('upload.html')
+    return render_template('upload2.html')
 
 
-@app.route('/map')
+@app.route('/product')
+@login_required
 def map():
     ''' Return template for maps '''
-    return render_template('map.html', title='Map')
+    insta_url = InstaPost.query.get(111).post_link + '/'
+    insta_url = 5 * [insta_url]
+    return render_template('product.html', insta_url=insta_url)
 
 
 @app.route('/map/refresh', methods=['POST'])
@@ -81,3 +88,8 @@ def map_refresh():
 def contact():
     ''' Return template for contacts '''
     return render_template('contact.html', title='Contact')
+
+@app.route('/about')
+def about():
+    ''' Return template for contacts '''
+    return render_template('aboutus.html', title='Contact')
