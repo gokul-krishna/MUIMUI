@@ -60,12 +60,11 @@ class InstaPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String)
     post_last_scrapped = db.Column(db.DateTime)
-    like = db.Column(db.Integer)
-    comment = db.Column(db.Integer)
-    text = db.Column(db.Integer)
+    likes = db.Column(db.Integer)
+    comments = db.Column(db.Integer)
     post_link = db.Column(db.String)
     img_link = db.Column(db.String)
-    
+
 
 class Products(db.Model):
     """Product inventory table

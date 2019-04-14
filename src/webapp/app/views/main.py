@@ -3,6 +3,7 @@ from app import app
 import random
 from flask import send_from_directory
 import os
+from ..models import db, User, InstaPost
 
 root_dir = os.path.dirname(os.getcwd()) + '/webapp/app/'
 
@@ -65,7 +66,9 @@ def upload():
 @app.route('/product')
 def map():
     ''' Return template for maps '''
-    return render_template('product.html')
+    insta_url = InstaPost.query.get(111).post_link + '/'
+    insta_url = 5 * [insta_url]
+    return render_template('product.html', insta_url=insta_url)
 
 
 @app.route('/map/refresh', methods=['POST'])
