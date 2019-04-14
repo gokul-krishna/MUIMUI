@@ -45,7 +45,7 @@ def signup():
         # Send back to the home page
         flash('Check your emails to confirm your email address.', 'positive')
         return redirect(url_for('index'))
-    return render_template('user/signup.html', form=form, title='Sign up')
+    return render_template('user/signup2.html', form=form, title='Sign up')
 
 
 @userbp.route('/confirm/<token>', methods=['GET', 'POST'])
@@ -91,7 +91,7 @@ def signin():
         else:
             flash('Unknown email address.', 'negative')
             return redirect(url_for('userbp.signin'))
-    return render_template('user/signin.html', form=form, title='Sign in')
+    return render_template('user/signin2.html', form=form, title='Sign in')
 
 
 @userbp.route('/signout')

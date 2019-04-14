@@ -53,19 +53,24 @@ def serve_css(filename):
 @app.route('/index')
 def index():
     ''' Return index template '''
-    return render_template('index.html', title='Home')
+    return render_template('index_2.html', title='Home')
 
 
 @app.route('/upload')
 def upload():
     ''' Return upload template '''
-    return render_template('upload.html')
+    return render_template('upload2.html')
 
 
 @app.route('/map')
 def map():
     ''' Return template for maps '''
-    return render_template('map.html', title='Map')
+    return render_template('nav_bar.html', title='Map')
+
+@app.route('/test')
+def test():
+    ''' Return template for maps '''
+    return render_template('user/signin.html', title='Test')
 
 
 @app.route('/map/refresh', methods=['POST'])
@@ -81,3 +86,8 @@ def map_refresh():
 def contact():
     ''' Return template for contacts '''
     return render_template('contact.html', title='Contact')
+
+@app.route('/about')
+def about():
+    ''' Return template for contacts '''
+    return render_template('aboutus.html', title='Contact')
