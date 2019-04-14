@@ -62,10 +62,10 @@ def upload():
     return render_template('upload.html')
 
 
-@app.route('/map')
+@app.route('/product')
 def map():
     ''' Return template for maps '''
-    return render_template('map.html', title='Map')
+    return render_template('product.html')
 
 
 @app.route('/map/refresh', methods=['POST'])
