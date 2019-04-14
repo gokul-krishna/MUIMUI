@@ -58,6 +58,12 @@ class InstaPost(db.Model):
     __tablename__ = 'insta_post'
 
     id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String)
+    post_last_scrapped = db.Column(db.DateTime)
+    likes = db.Column(db.Integer)
+    comments = db.Column(db.Integer)
+    post_link = db.Column(db.String)
+    img_link = db.Column(db.String)
 
 
 class Products(db.Model):

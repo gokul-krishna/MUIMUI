@@ -4,7 +4,7 @@ from app.config_common import *
 
 
 # DEBUG has to be to False in a production environment for security reasons
-DEBUG = False
+DEBUG = True
 
 # Secret key for generating tokens
 SECRET_KEY = 'houdini'
@@ -12,8 +12,14 @@ SECRET_KEY = 'houdini'
 # Admin credentials
 ADMIN_CREDENTIALS = ('admin', 'pa$$word')
 
+DBUSER = 'marwa'
+DBHOST = 'dbinstance.c6phnxzyppjs.us-west-2.rds.amazonaws.com'
+DBPASS = 'muimuidb'
+DBPORT = '5432'
+DBNAME = 'muimui'
+
 # Database choice
-SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
+SQLALCHEMY_DATABASE_URI = f'postgresql://{DBUSER}:{DBPASS}@{DBHOST}:{DBPORT}/{DBNAME}'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # Configuration of a Gmail account for sending mails
