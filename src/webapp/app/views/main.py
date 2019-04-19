@@ -96,6 +96,7 @@ def upload():
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file_selector.data
+        file.seek(0)
         ftemp = NamedTemporaryFile(delete=False)
         file.save(ftemp)
         links = get_nn(ftemp.name)

@@ -1,11 +1,15 @@
 from fastai.vision import *
 from warnings import filterwarnings
 # from io import BytesIO
+import numpy as np
+import cv2
 from PIL import Image
 import torch
 from torch.autograd import Variable
 from torchvision import transforms
 from annoy import AnnoyIndex
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 filterwarnings('ignore')
@@ -26,10 +30,59 @@ learn.model.eval()
 layer = learn.model._modules.get('1')._modules.get('7')
 
 
+def pil2cv(im):
+    return np.asarray(im)
+
+
+def im_squared(im, col=[255, 255, 255]):
+
+    v, h = im.shape[0], im.shape[1]
+    diff = abs(h - v)
+    pad = int(diff / 2)
+    if v > h:
+        return cv2.copyMakeBorder(im, 0, 0, pad, pad,
+                                  cv2.BORDER_CONSTANT, value=col)
+    else:
+        return cv2.copyMakeBorder(im, pad, pad, 0, 0,
+                                  cv2.BORDER_CONSTANT, value=col)
+
+
+def resize(im, new_height=None, new_width=None, scale=0.5):
+    """resizes images"""
+    r, c, _ = im.shape
+
+    if new_height is None and new_width is None and scale is not None:
+        # keeping the same aspect ratio as original
+        new_height = int(scale * r)
+        new_width = int(scale * c)
+    elif new_height is None and new_width is not None:
+        # use the scale based on old and new width
+        scale = float(new_width) / float(c)
+        new_height = int(scale * r)
+    elif new_height is not None and new_width is None:
+        # use the scale based on old and new height
+        scale = float(new_height) / float(r)
+        new_width = int(scale * c)
+    elif new_height is not None and new_width is not None:
+        # just use the new height and old height
+        pass
+    else:
+        return None
+
+    imr = cv2.resize(im, (new_width, new_height))
+    return imr
+
+
 def get_vector(fpath):
 
     # img = Image.open(BytesIO(binary_data))
     img = Image.open(fpath)
+    h, w = img.size
+    if h != sz or w != sz:
+        img = pil2cv(img)
+        img = im_squared(img)
+        img = resize(img, sz, sz)
+        img = Image.fromarray(img)
 
     t_img = Variable(normalize(to_tensor(scaler(img))).unsqueeze(0))
     my_embedding = torch.zeros((1, 512))

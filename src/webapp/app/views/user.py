@@ -45,7 +45,7 @@ def signup():
         #email.send(user.email, subject, html)
         # Send back to the home page
         #flash('Check your emails to confirm your email address.', 'positive')
-        return redirect(url_for('map'))
+        return redirect(url_for('product'))
     return render_template('user/signup2.html', form=form, title='Sign up')
 
 
@@ -85,7 +85,7 @@ def signin():
                 login_user(user)
                 # Send back to the home page
                 flash('Succesfully signed in.', 'positive')
-                return redirect(url_for('map'))
+                return redirect(url_for('product'))
             else:
                 flash('The password you have entered is wrong.', 'negative')
                 return redirect(url_for('userbp.signin'))
