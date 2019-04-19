@@ -7,9 +7,9 @@ from flask_admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin.contrib.fileadmin import FileAdmin
 
-
 from app import app, db
-from app.models import User, InstaInfluencer, Products
+from app.models import (User, InstaInfluencer, Products, InstaPost,
+                        UserInfluencerMap)
 
 
 admin = Admin(app, name='Admin', template_mode='bootstrap3')
@@ -36,7 +36,7 @@ class ModelView(ModelView):
 # Users
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(InstaInfluencer, db.session))
-admin.add_view(ModelView(Products, db.session))
+admin.add_view(ModelView(UserInfluencerMap, db.session))
 
 # Static files
 path = op.join(op.dirname(__file__), 'static')

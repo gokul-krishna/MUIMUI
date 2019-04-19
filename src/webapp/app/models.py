@@ -9,7 +9,6 @@ class User(db.Model, UserMixin):
     """ A user who has an account on the website. """
 
     __tablename__ = 'users'
-
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     phone = db.Column(db.String)
@@ -98,7 +97,19 @@ class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     page_link = db.Column(db.String)
-    date_scrapped = db.Column(db.DateTime)
+    # date_scrapped = db.Column(db.DateTime)
     image_link = db.Column(db.String)
     price = db.Column(db.Float)
-    origin_site = db.Column(db.String)
+    # origin_site = db.Column(db.String)
+
+
+class UserInfluencerMap(db.Model):
+    """Mapping table between user and influencer
+    """
+
+    __tablename__ = 'user_influencer_map'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_email = db.Column(db.String, db.ForeignKey('users.email'))
+    influencer_id = db.Column(db.Integer,
+                              db.ForeignKey('insta_influencer.id'))
