@@ -82,7 +82,7 @@ def serve_css(filename):
 @app.route('/index')
 def index():
     ''' Return index template '''
-    recent_posts = InstaPost.query.order_by(desc(InstaPost.post_last_scrapped)
+    recent_posts = InstaPost.query.order_by(desc(InstaPost.post_date)
                                     ).limit(6).all()
     post_links = [i.post_link for i in recent_posts]
     return render_template('index_2.html',
@@ -119,7 +119,7 @@ def product():
                     .filter(InstaInfluencer.id.in_(tuple(influencers))).all()
     influencers = [i.user_name for i in influencers]
     insta_urls = InstaPost.query.filter(InstaPost.user_name.in_(tuple(influencers))
-                                       ).order_by(desc(InstaPost.post_last_scrapped))\
+                                       ).order_by(desc(InstaPost.post_date))\
                                         .limit(5).all()
     insta_urls = [i.post_link + '/' for i in insta_urls]
     return render_template('product.html', insta_url=insta_urls)

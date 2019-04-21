@@ -73,7 +73,9 @@ class InstaPost(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String)
-    post_last_scrapped = db.Column(db.DateTime)
+    post_date = db.Column(db.DateTime)
+    last_scrapped_at = db.Column(db.DateTime)
+    post_text = db.Column(db.String)
     likes = db.Column(db.Integer)
     comments = db.Column(db.Integer)
     post_link = db.Column(db.String)

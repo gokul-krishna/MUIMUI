@@ -83,6 +83,7 @@ def get_vector(fpath):
         img = im_squared(img)
         img = resize(img, sz, sz)
         img = Image.fromarray(img)
+        img.save(fpath + '.jpg')
 
     t_img = Variable(normalize(to_tensor(scaler(img))).unsqueeze(0))
     my_embedding = torch.zeros((1, 512))
