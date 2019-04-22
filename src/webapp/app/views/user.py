@@ -19,6 +19,11 @@ def signup():
     ''' Render signup for to register user
     and insert entry in database '''
     form = user_forms.SignUp()
+    mapping = {q.user_name:int(q.id)
+               for q in models.InstaInfluencer.query.with_entities(
+                                    models.InstaInfluencer.user_name, 
+                                    models.InstaInfluencer.id).distinct()}
+    form.insta_influencers.choices = [(k, k) for k, v in mapping.items()]
     if form.validate_on_submit():
         # Create a user who hasn't validated his email address
         user = models.User(
@@ -29,8 +34,15 @@ def signup():
             confirmation=False,
             _password=form.password.data,
         )
+
         # Insert the user in the database
         db.session.add(user)
+        for ids in form.insta_influencers.data:
+            if_id = mapping[ids]
+            insta_map = models.UserInfluencerMap(
+                user_email = form.email.data,
+                influencer_id = int(if_id))
+            db.session.add(insta_map)
         db.session.commit()
         # Subject of the confirmation email
         #subject = 'Please confirm your email address.'

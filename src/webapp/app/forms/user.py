@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import TextField, PasswordField
+from wtforms import TextField, PasswordField, SelectMultipleField, SelectField
 from wtforms.validators import (Required, Length, Email, ValidationError,
                                 EqualTo)
 from app.models import User
@@ -76,3 +76,6 @@ class SignUp(Form):
         EqualTo('confirm', message='Passwords must match.')
     ], description='Password')
     confirm = PasswordField(description='Confirm password')
+    insta_influencers = SelectMultipleField(description='Insta Influencers', 
+                        choices=[('A','A'), ('B','B'), ('C', 'C'), ('D', 'D')]) 
+
