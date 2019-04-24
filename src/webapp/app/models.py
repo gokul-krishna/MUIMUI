@@ -97,11 +97,13 @@ class Products(db.Model):
     """
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
     page_link = db.Column(db.String)
-    # date_scrapped = db.Column(db.DateTime)
     image_link = db.Column(db.String)
+    name = db.Column(db.String)
+    # date_scrapped = db.Column(db.DateTime)
     price = db.Column(db.Float)
+    description = db.Column(db.String)
+    brand = db.Column(db.String)
     # origin_site = db.Column(db.String)
 
 
