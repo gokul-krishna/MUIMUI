@@ -87,7 +87,7 @@
     <div class="super_container_inner">
       <div class="super_overlay"></div>
       <!-- Product -->
-      {% for i in range(5) %}
+      {% for i in range(4) %}
       <section id="portfolio">
         <div class="container">
           <div class="row">
@@ -102,62 +102,22 @@
                         <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="{{insta_url[i]}}?utm_source=ig_embed&amp;utm_medium=loading" data-instgrm-version="12" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:370px; min-width:124px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="{{insta_url[i]}}?utm_source=ig_embed&amp;utm_medium=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
                       </div>
                     </div>
+                      {% for j in range(4) %}
                     <div class="iso-box graphic template col-md-4 col-sm-6">
                       <div class="portfolio-thumb">
-                        <img src="static/images/1.jpg" class="img-responsive" alt="Portfolio">
-                        <p>Mango - $79.9</p>
+                        <img src="{{ image_links[i][j] }}" class="img-responsive" alt="Portfolio">
+                        <p>{{ brand_names[i][j]+ "-" + prices[i][j] }}</p>
                         <div class="portfolio-overlay">
                           <div class="portfolio-item">
-                            <a href="https://shop.mango.com/us/women/dresses-short/textured-gingham-check-dress_43065792.html?c=20"><i class="fa fa-link"></i></a>
-                            <h2>Mango</h2>
-                            <h2>$79.9</h2>
-                            <p>Flared design. Textured fabric. V-neck neckline. Sleeveless. Button closure.</p>
+                            <a href={{ page_links[i][j] }}><i class="fa fa-link"></i></a>
+                            <h2>{{ brand_names[i][j] }}</h2>
+                            <h2>{{ prices[i][j] }}</h2>
+<!--                             <p>{{ description[i][j] }}</p> -->
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="iso-box template graphic col-md-4 col-sm-6">
-                      <div class="portfolio-thumb">
-                        <img src="static/images/2.jpg" class="img-responsive" alt="Portfolio">
-                        <p>Mango - $79.9</p>
-                        <div class="portfolio-overlay">
-                          <div class="portfolio-item">
-                            <a href="https://shop.mango.com/us/women/dresses-midi/striped-bow-dress_43060836.html?c=01"><i class="fa fa-link"></i></a>
-                            <h2>Mango</h2>
-                            <h2>$79.9</h2>
-                            <p>Flared design. Wrap design. V-neck neckline. Three-quarter sleeve with buttoned cuff.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="iso-box photoshop branding col-md-4 col-sm-6">
-                      <div class="portfolio-thumb">
-                        <img src="static/images/3.jpg" class="img-responsive" alt="Portfolio">
-                        <p>Mango - $99.9</p>
-                        <div class="portfolio-overlay">
-                          <div class="portfolio-item">
-                            <a href="https://shop.mango.com/us/women/dresses-midi/pleated-midi-dress_43067793.html?c=85&utm_source=google&utm_medium=cpc&utm_campaign=Shopping+-+1WOMAN+-+US&gclid=EAIaIQobChMI-t6wzY7O4QIVg_hkCh3A3QemEAQYBCABEgLYEPD_BwE&ptaid=pla-312182498281&pgrid=56245161020&talla=21"><i class="fa fa-link"></i></a>
-                            <h2>Mango</h2>
-                            <h2>$99.9</h2>
-                            <p>Flowy fabric. Pleated fabric. Flared design. Short sleeve. Belt loops. Bow at waist. Batwing sleeve. Striped print. Asymmetric button fastening at back.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="iso-box graphic branding col-md-4 col-sm-6">
-                      <div class="portfolio-thumb">
-                        <img src="static/images/4.jpg" class="img-responsive" alt="Portfolio">
-                        <p>Mango - $59.9</p>
-                        <div class="portfolio-overlay">
-                          <div class="portfolio-item">
-                            <a href="https://shop.mango.com/us/women/dresses-midi/midi-printed-dress_43007722.html?c=70&n=1&s=prendas_she.familia;32"><i class="fa fa-link"></i></a>
-                            <h2>Mango</h2>
-                            <h2>$59.99</h2>
-                            <p>Cotton fabric. Print. V-neck neckline. Short sleeve. Bow at waist. Concealed back zip closure.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                          {% endfor %}
                   </div>
                 </div>
               </div>
