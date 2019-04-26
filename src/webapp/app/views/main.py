@@ -4,7 +4,7 @@ import random
 from flask import send_from_directory
 from sqlalchemy import desc
 import os
-from ..models import (db, User, InstaPost, UserInfluencerMap, 
+from ..models import (db, User, InstaPost, UserInfluencerMap,
                       Products, InstaInfluencer)
 from flask.ext.login import login_user, logout_user, login_required
 from flask_login import current_user, login_user, login_required, logout_user
@@ -15,14 +15,15 @@ from flask.ext.bootstrap import Bootstrap
 from tempfile import NamedTemporaryFile
 import sys
 import os
-
-
 sys.path.insert(0, os.path.abspath('../model/'))
+root_dir = os.path.dirname(os.getcwd()) + '/webapp/app/'
+
 from inference import get_nn
 
 
+
+
 bootstrap = Bootstrap(app)
-root_dir = os.path.dirname(os.getcwd()) + '/webapp/app/'
 
 
 class UploadFileForm(FlaskForm):
@@ -83,7 +84,7 @@ def serve_css(filename):
 def index():
     ''' Return index template '''
     recent_posts = InstaPost.query.order_by(desc(InstaPost.post_date)
-                                    ).limit(6).all()
+                                            ).limit(6).all()
     post_links = [i.post_link for i in recent_posts]
     return render_template('index_2.html',
                            authenticated=current_user.is_authenticated,
@@ -103,7 +104,7 @@ def upload():
         products = Products.query.filter(Products.id.in_(tuple(links))).all()
         products = products[1:]
         return render_template('discovery.html', products=products,
-                                tmpfile=ftemp.name)
+                               tmpfile=ftemp.name)
 
     return render_template('upload2.html', form=form)
 
@@ -112,23 +113,51 @@ def upload():
 @login_required
 def product():
     ''' Return template for maps '''
-    user_email = current_user.email
-    influencers = UserInfluencerMap.query.filter_by(user_email=user_email).all()
-    influencers = [i.influencer_id for i in influencers]
-    influencers = InstaInfluencer.query\
-                    .filter(InstaInfluencer.id.in_(tuple(influencers))).all()
-    influencers = [i.user_name for i in influencers]
-    insta_urls = InstaPost.query.filter(InstaPost.user_name.in_(tuple(influencers))
-                                       ).order_by(desc(InstaPost.post_date))\
-                                        .limit(5).all()
+    # user_email = current_user.email
+    # influencers = UserInfluencerMap.query.
+    # filter_by(user_email=user_email).all()
+    # influencers = [i.influencer_id for i in influencers]
+    # influencers = InstaInfluencer.query\
+    #                 .filter(InstaInfluencer.id.
+    # in_(tuple(influencers))).all()
+    # influencers = [i.user_name for i in influencers]
+    # insta_urls = InstaPost.query.filter
+    # (InstaPost.user_name.in_(tuple(influencers))
+    #          ).order_by(desc(InstaPost.post_date))\
+    #                                     .limit(5).all()
+    insta_ids = [1, 2, 3, 4, 5]
+    insta_urls = InstaPost.query.filter(InstaPost.id.in_(tuple(insta_ids)))
     insta_urls = [i.post_link + '/' for i in insta_urls]
-    return render_template('product.html', insta_url=insta_urls)
+    # one loop to get nn IDs for each of those 5 imgs
+    # for id
+    prod_ids = [[i for i in range(1, 5)] for i in range(5)]
+    prod_list = [Products.query.filter(Products.id.in_(tuple(id)))
+                 for id in prod_ids]
+    prices = [[str(p.price) for p in prod]for prod in prod_list]
+    brand_names = [[p.brand for p in prod]for prod in prod_list]
+    image_links = [[p.image_link for p in prod]for prod in prod_list]
+    page_links = [[p.page_link for p in prod]for prod in prod_list]
+    description = [[p.description for p in prod]for prod in prod_list]
+
+    # prices = [['$'+str(i) for i in range(1,5)] for i in range(5)]
+    # brand_names = [['A','B','C','D'], ['A','B','C','D'], ['A','B','C','D'],
+    #           ['A','B','C','D'], ['A','B','C','D']]
+    # descp = "blah blah blah"
+    # description = [[descp for i in range(4)] for i in range(5)]
+    # image_links = [[hrefs for i in range(4)] for i in range(5)]
+    # brand_name = Products.query.filter_by(Products.brands)
+
+    return render_template('product.html', insta_url=insta_urls,
+                           brand_names=brand_names, prices=prices,
+                           description=description, image_links=image_links,
+                           page_links=page_links)
 
 
 @app.route('/contact')
 def contact():
     ''' Return template for contacts '''
     return render_template('contact.html', title='Contact')
+
 
 @app.route('/about')
 def about():

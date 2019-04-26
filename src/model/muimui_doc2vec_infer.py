@@ -27,7 +27,10 @@ username = "marwa"
 password = "muimuidb"
 port = "5432"
 
-sql_conn_string = "host='{}' dbname='{}' user='{}' password='{}' port='{}'".format(host, dbname, username, password, port)
+sql_conn_string = "host='{}' dbname='{}' user='{}' \
+                   password='{}' port='{}'".format(host, dbname,
+                                                   username,
+                                                   password, port)
 
 
 def cleanText(text):
@@ -35,11 +38,12 @@ def cleanText(text):
     Remove html elements, convert to lower
     """
     text = BeautifulSoup(text, "lxml").text
-    text = re.sub(r'\|\|\|', r' ', text) 
+    text = re.sub(r'\|\|\|', r' ', text)
     text = re.sub(r'http\S+', r'<URL>', text)
     text = text.lower()
     text = text.replace('x', '')
     return text
+
 
 def clean_text(text):
     """
@@ -51,14 +55,13 @@ def clean_text(text):
     text = text.lower()
     regex = re.compile('[' + re.escape(string.punctuation) + '0-9\\r\\t\\n]')
     # delete stuff but leave at least a space to avoid clumping together
-    nopunct = regex.sub(" ", text)  
+    nopunct = regex.sub(" ", text)
     words = nopunct.split(" ")
     # ignore a, an, to, at, be, ...
-    words = [w for w in words if (len(w) > 2 and (w not in stops))]  
+    words = [w for w in words if (len(w) > 2 and (w not in stops))]
     words = ' '.join(words)
-
-
     return words
+
 
 def tokenize_text(text):
     """
@@ -72,6 +75,7 @@ def tokenize_text(text):
             tokens.append(word.lower())
     return tokens
 
+
 def retrieve_imglinks(sql_conn_string, ID_list):
     """
     Returns images links from db for the
@@ -81,7 +85,7 @@ def retrieve_imglinks(sql_conn_string, ID_list):
     cur = conn.cursor()
     tuples = tuple(ID_list)
     cmds = [f"""
-            select ID,image_link from products 
+            select ID,image_link from products
             where ID in {tuples}
             ;
             """]
@@ -90,24 +94,22 @@ def retrieve_imglinks(sql_conn_string, ID_list):
         try:
             cur.execute(c)
             rows = cur.fetchall()
-            for ID,data in rows:
+            for ID, data in rows:
                 out_collection[ID] = data
             conn.commit()
         except psycopg2.ProgrammingError:
-            print( """CAUTION FAILED: '%s' """ % c)
+            print("""CAUTION FAILED: '%s' """ % c)
             conn.rollback()
     return [out_collection[ID] for ID in tuples]
 
 
 if __name__ == '__main__':
-	input_query = sys.argv[1]
-	input_query = tokenize_text(clean_text(cleanText(input_query)))
-
-	model_load = Doc2Vec.load(fname_model)
-	vec = model_load.infer_vector(input_query)
-	ID_list = [ID for ID, score in model_load.docvecs.most_similar([vec], topn=10)]
-	img_links = retrieve_imglinks(sql_conn_string, ID_list)
-	for il in img_links:
-		print(il)
-
-	
+    input_query = sys.argv[1]
+    input_query = tokenize_text(clean_text(cleanText(input_query)))
+    model_load = Doc2Vec.load(fname_model)
+    vec = model_load.infer_vector(input_query)
+    ID_list = [ID for ID,
+               score in model_load.docvecs.most_similar([vec], topn=10)]
+    img_links = retrieve_imglinks(sql_conn_string, ID_list)
+    for il in img_links:
+        print(il)

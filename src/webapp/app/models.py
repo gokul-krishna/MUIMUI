@@ -43,8 +43,8 @@ class User(db.Model, UserMixin):
         # self._password = pwhash.decode('utf8')
 
     def set_password(self, password):
+        """ set password """
         self._password = bcrypt.generate_password_hash(password).decode('utf-8')
-
 
     def check_password(self, plaintext):
         """ Checks password entered by user with original password """

@@ -1,4 +1,4 @@
-from user_definition import sql_conn_string 
+from user_definition import sql_conn_string
 import psycopg2
 conn = psycopg2.connect(sql_conn_string)
 print("Database connected successfully")
@@ -16,5 +16,5 @@ for c in cmds:
             print([str(d) for d in data])
         conn.commit()
     except psycopg2.ProgrammingError:
-        print( """CAUTION FAILED: '%s' """ % c)
+        print("""CAUTION FAILED: '%s' """ % c)
         conn.rollback()

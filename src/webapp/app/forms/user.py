@@ -61,9 +61,9 @@ class SignUp(Form):
     ''' User sign up form. '''
 
     first_name = TextField(validators=[Required(), Length(min=2)],
-                     description='Name')
+                           description='Name')
     last_name = TextField(validators=[Required(), Length(min=2)],
-                        description='Surname')
+                          description='Surname')
     phone = TextField(validators=[Required(), Length(min=6)],
                       description='Phone number')
     email = TextField(validators=[Required(), Email(),
@@ -76,6 +76,6 @@ class SignUp(Form):
         EqualTo('confirm', message='Passwords must match.')
     ], description='Password')
     confirm = PasswordField(description='Confirm password')
-    insta_influencers = SelectMultipleField(description='Insta Influencers', 
-                        choices=[('A','A'), ('B','B'), ('C', 'C'), ('D', 'D')]) 
-
+    insta_influencers = SelectMultipleField(description='Insta Influencers',
+                                            choices=[('A', 'A'), ('B', 'B'),
+                                                     ('C', 'C'), ('D', 'D')])

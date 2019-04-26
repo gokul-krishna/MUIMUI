@@ -25,17 +25,18 @@ data = ImageDataBunch.single_from_classes('../', range(228), size=sz
                                           ).normalize(imagenet_stats)
 
 learn = cnn_learner(data, models.resnet34)
-learn.load('stage-1');
+learn.load('stage-1')
 learn.model.eval()
 layer = learn.model._modules.get('1')._modules.get('7')
 
 
 def pil2cv(im):
+    """Converts image data"""
     return np.asarray(im)
 
 
 def im_squared(im, col=[255, 255, 255]):
-
+    """makes the image square"""
     v, h = im.shape[0], im.shape[1]
     diff = abs(h - v)
     pad = int(diff / 2)
@@ -74,7 +75,7 @@ def resize(im, new_height=None, new_width=None, scale=0.5):
 
 
 def get_vector(fpath):
-
+    """gets vector of the image"""
     # img = Image.open(BytesIO(binary_data))
     img = Image.open(fpath)
     h, w = img.size
@@ -89,6 +90,7 @@ def get_vector(fpath):
     my_embedding = torch.zeros((1, 512))
 
     def copy_data(m, i, o):
+        """copy embeddings"""
         my_embedding.copy_(o.data)
 
     h = layer.register_forward_hook(copy_data)
@@ -103,6 +105,7 @@ t.load('../prod.ann')
 
 
 def get_nn(fpath):
+    """returns list of integer indexes"""
     # returns list of integer indexes
     emb = get_vector(fpath)
     return t.get_nns_by_vector(emb[0], 5)
