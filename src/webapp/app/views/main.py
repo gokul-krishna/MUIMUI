@@ -184,8 +184,12 @@ def product():
                      "http://us.topshop.com/en/tsus/product/clothing-70483/rompers-jumpsuits-4107634/pink-gingham-bardot-playsuit-8618112",
                      "https://www.forever21.com/us/shop/catalog/product/f21/dress_romper/2000321430"]
 
-
-
+    prices[0] = ['$89.50','$79.50','$54.50', '$128.00']
+    brand_names[0] = ['INC International Concepts','INC International Concepts','Style & Co','Free People']
+    description[0] = ["I.N.C. International Concepts takes the wrap top to new heights with this delicately embroidered volume-sleeve style, finished with an oversized tie at the side.",
+                      "Get your hands on this gorgeous lace top from I.N.C. International Concepts, in a flattering wrap style with a tie at the side waist.",
+                      "Lightweight and airy, this flowing top by Style & Co features lace detailing at the yoke and front placket as well as a handkerchief hemline for plenty of boho flair.",
+                      "Pretty touches of embroidery and lace detail a flowy silhouette with this beautiful pullover tunic from Free People. "]
 
     description = [[p.description for p in prod]for prod in prod_list]
 
