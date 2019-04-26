@@ -136,13 +136,13 @@ def product():
     insta_filenames = ["../webapp/app/static/images/img_1.jpg", "../webapp/app/static/images/img_2.jpg",
                        "../webapp/app/static/images/img_3.jpg", "../webapp/app/static/images/img_4.jpg",
                        "../webapp/app/static/images/img_5.jpg"]
-    prod_ids = [get_nn(fname) for fname in insta_filenames]
+    # prod_ids = [get_nn(fname) for fname in insta_filenames]
 
 
 
     # one loop to get nn IDs for each of those 5 imgs
     # for id
-    # prod_ids = [[i for i in range(1, 5)] for i in range(5)]
+    prod_ids = [[i for i in range(1, 5)] for i in range(5)]
     prod_list = [Products.query.filter(Products.id.in_(tuple(id)))
                 for id in prod_ids]
     prices = [[str(p.price) for p in prod]for prod in prod_list]
