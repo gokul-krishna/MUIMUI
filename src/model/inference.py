@@ -108,4 +108,4 @@ def get_nn(fpath):
     """returns list of integer indexes"""
     # returns list of integer indexes
     emb = get_vector(fpath)
-    return t.get_nns_by_vector(emb[0], 5)
+    return t.get_nns_by_vector(emb[0], 5, search_k=10)
