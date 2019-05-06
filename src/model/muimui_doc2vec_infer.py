@@ -102,14 +102,23 @@ def retrieve_imglinks(sql_conn_string, ID_list):
             conn.rollback()
     return [out_collection[ID] for ID in tuples]
 
-
-if __name__ == '__main__':
-    input_query = sys.argv[1]
+def return_nn(text):
+    input_query = text
     input_query = tokenize_text(clean_text(cleanText(input_query)))
     model_load = Doc2Vec.load(fname_model)
     vec = model_load.infer_vector(input_query)
     ID_list = [ID for ID,
-               score in model_load.docvecs.most_similar([vec], topn=10)]
-    img_links = retrieve_imglinks(sql_conn_string, ID_list)
-    for il in img_links:
-        print(il)
+               score in model_load.docvecs.most_similar([vec], topn=100)]
+    
+    return ID_list
+
+# if __name__ == '__main__':
+#     input_query = sys.argv[1]
+#     input_query = tokenize_text(clean_text(cleanText(input_query)))
+#     model_load = Doc2Vec.load(fname_model)
+#     vec = model_load.infer_vector(input_query)
+#     ID_list = [ID for ID,
+#                score in model_load.docvecs.most_similar([vec], topn=10)]
+#     img_links = retrieve_imglinks(sql_conn_string, ID_list)
+#     for il in img_links:
+#         print(il)
