@@ -133,12 +133,12 @@ def product():
     # one loop to get nn IDs for each of those 5 imgs
     # for id
     prod_ids = [data[str(ids)] for ids in insta_post_id]
-    # prod_ids = [[i for i in range(1, 5)] for i in range(5)]
+    
     prod_list = [Products.query.filter(Products.id.in_(tuple(id)))
                 for id in prod_ids]
     prices = [[str(p.price) for p in prod]for prod in prod_list]
     brand_names = [[p.brand for p in prod]for prod in prod_list]
-    image_links = [[p.image_link for p in prod]for prod in prod_list]
+    image_links = [[p.image_link  if p.image_link[0:4] == 'http' else 'https://'+p.image_link for p in prod ]for prod in prod_list]
     
     page_links = [[p.page_link for p in prod]for prod in prod_list]
     
