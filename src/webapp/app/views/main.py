@@ -112,38 +112,30 @@ def upload():
 @login_required
 def product():
     ''' Return template for maps '''
-    f = open("../model/reco.json")
+    f = open("../model/reco_new.json")
     data = json.load(f)
     f.close()
-
     user_email = current_user.email
     influencers = UserInfluencerMap.query.filter_by(user_email=user_email).all()
     insta_ids = [i.influencer_id for i in influencers]
     influencers = InstaInfluencer.query\
                     .filter(InstaInfluencer.id.in_(tuple(insta_ids))).all()
     influencers = [i.user_name for i in influencers]
-
     valid_posts = [int(d) for d in data.keys()]
     insta_urls = InstaPost.query.filter(InstaPost.user_name.in_(tuple(influencers))).filter(InstaPost.id.in_(tuple(valid_posts))).order_by(desc(InstaPost.post_date))\
                                         .limit(5).all()
-
     insta_post_id = [i.id  for i in insta_urls]
     insta_urls = [i.post_link + '/' for i in insta_urls]
     
     # one loop to get nn IDs for each of those 5 imgs
     # for id
     prod_ids = [data[str(ids)] for ids in insta_post_id]
-    
     prod_list = [Products.query.filter(Products.id.in_(tuple(id)))
                 for id in prod_ids]
     prices = [[str(p.price) for p in prod]for prod in prod_list]
     brand_names = [[p.brand for p in prod]for prod in prod_list]
     image_links = [[p.image_link  if p.image_link[0:4] == 'http' else 'https://'+p.image_link for p in prod ]for prod in prod_list]
-    
     page_links = [[p.page_link for p in prod]for prod in prod_list]
-    
-  
-
     description = [[p.description for p in prod]for prod in prod_list]
    
 
