@@ -9,6 +9,7 @@ from torch.autograd import Variable
 from torchvision import transforms
 from annoy import AnnoyIndex
 from PIL import ImageFile
+from person_detect import get_person
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
@@ -81,6 +82,7 @@ def get_vector(fpath):
     h, w = img.size
     if h != sz or w != sz:
         img = pil2cv(img)
+        img = get_person(img)
         img = im_squared(img)
         img = resize(img, sz, sz)
         img = Image.fromarray(img)
