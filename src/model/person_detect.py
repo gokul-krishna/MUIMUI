@@ -72,9 +72,17 @@ def get_foreground(img):
 
 def get_person(img):
     imr, bbs = HogDescriptor(img)
-    bb = bbs[0]
-    bb = [bb[0], bb[1], bb[2]-bb[0], bb[3]-bb[1]]
-    imc = crop(imr, bb[1], bb[0], bb[3], bb[2])
-    masked = get_foreground(imc)
-    ims = im_squared(masked)
-    return ims
+    try:
+        bbs = [[bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1]]
+               for bb in bbs]
+        bbs = sorted(bbs, key=lambda x: x[2] * x[3],
+                     reverse=True)
+        bb = bbs[0]
+        if max(bb[2], bb[3]) < 200:
+            return img
+        imc = crop(imr, bb[1], bb[0], bb[3], bb[2])
+        masked = get_foreground(imc)
+        ims = im_squared(masked)
+        return ims
+    except:
+        return img
