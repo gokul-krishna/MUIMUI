@@ -105,7 +105,8 @@
                       {% for j in range(4) %}
                     <div class="iso-box graphic template col-md-4 col-sm-6">
                       <div class="portfolio-thumb">
-                        <img src="{{ image_links[i][j] }}" class="img-responsive" width="100" height="100" alt="Portfolio">
+                        <img src="{{ image_links[i][j] }}" class="img-responsive" alt="Portfolio" 
+                        style="max-width:400px;max-height:400px">
                         <p>{{ brand_names[i][j]+ "-" + prices[i][j] }}</p>
                         <div class="portfolio-overlay">
                           <div class="portfolio-item">
