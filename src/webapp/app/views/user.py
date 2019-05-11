@@ -37,6 +37,7 @@ def signup():
 
         # Insert the user in the database
         db.session.add(user)
+        db.session.commit()
         for ids in form.insta_influencers.data:
             if_id = mapping[ids]
             insta_map = models.UserInfluencerMap(
