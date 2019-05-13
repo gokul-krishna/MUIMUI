@@ -2,6 +2,13 @@
 {% extends "nav_bar.html" %}
 {% block head %}
 	{{ super() }}
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140032341-1"></script>
+		<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-140032341-1');
+		</script>
 {% endblock %}
 <body>
 	{% block menu %}
@@ -132,7 +139,7 @@
 			</div>
 			<div class="container">
 				<br><br>
-				<a href="/upload" class="myButton">Search by Image</a>
+				<a href="/upload" class="myButton" onClick="gtag('event','click',{'event_category':'button','event_label':'search', 'value':10});">Search by Image</a>
 			</div>
 			<!-- Influencers -->
 			<div class="products">

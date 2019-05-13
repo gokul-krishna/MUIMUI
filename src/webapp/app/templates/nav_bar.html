@@ -28,11 +28,19 @@
 			    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
 				<!-- Custom CSS -->
 				<link rel="stylesheet" href="css/custom.css">
+
+				<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140032341-1"></script>
+		<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-140032341-1');
+		</script>
 </head>
 {% endblock %}
 <!-- Menu -->
 
- <>
 {% block menu %}
 <div class="menu">
 
@@ -80,8 +88,8 @@
 
 
                <div>
-          <a href="/user/signup" class="Button">Sign Up</a>
-			<a href="/user/signin" class="Button">Sign In</a>
+          <a href="/user/signup" class="Button" onClick="gtag('event','click',{'event_category':'button','event_label':'sign_up_button', 'value':10});">Sign Up</a>
+			<a href="/user/signin" class="Button" onClick="gtag('event','click',{'event_category':'button','event_label':'sign_in_button', 'value':10});">Sign In</a>
 	        </div>
 				</div>
 			</div>
