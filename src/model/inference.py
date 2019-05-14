@@ -28,7 +28,7 @@ data = ImageDataBunch.single_from_classes('../', range(228), size=sz
 learn = cnn_learner(data, models.resnet34)
 learn.load('stage-1')
 learn.model.eval()
-layer = learn.model._modules.get('1')._modules.get('7')
+layer = learn.model._modules.get('1')._modules.get('5')
 
 
 def pil2cv(im):
