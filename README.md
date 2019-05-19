@@ -1,1 +1,1 @@
-![](muimui_poster.png)
+![](muimui_poster.jpg)
